@@ -6,14 +6,45 @@ import java.util.Scanner;
 public class Main {
 
     int binarySearch(LinkedList a, Iris item, int low, int high) {
+        if (high >= low) {
+            int mid = low + (high - low) / 2;
 
+            // If the element is present at the
+            // middle itself
+            if (a.get(mid) == item)
+                return mid;
+
+            // If element is smaller than mid, then
+            // it can only be present in left subarray
+            if (a.get(mid).compareTo(item) > 0))
+                return binarySearch(a, item, mid - 1, low);
+
+            // Else the element can only be present
+            // in right subarray
+            return binarySearch(a, item, mid+1, high);
+        }
+
+        // We reach here when element is not present
+        // in array
+        return -1;
         return 0;
     }
 
     void insertionSort(LinkedList a, int n) {
-        int i = 0;
-        while (i < a.size()) {
+        int n = a.size();
+        for (int i = 1; i < n; ++i) {
+            int key = (int) a.get(i);
+            int j = i - 1;
 
+            /* Move elements of arr[0..i-1], that are
+               greater than key, to one position ahead
+               of their current position */
+            while (j >= 0 && a[j] > key) {
+                a[j + 1] = a[j];
+                j = j - 1;
+            }
+            a[j + 1] = key;
+        }
         }
     }
 
