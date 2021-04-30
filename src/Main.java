@@ -115,16 +115,32 @@ public class Main {
                     Double.parseDouble(lines[3]), lines[4]));
         }
         reader.close();
-
+//runtime
+        long startTimeArrayList = System.nanoTime();
         insertionSortArrayList(arraylist);
+        long endTimeArrayList   = System.nanoTime();
+        long totalTimeArrayList = endTimeArrayList - startTimeArrayList;
+
+        long startTimeLinkedList = System.nanoTime();
         insertionSortLinkedList(linkedlist);
+        long endTimeLinkedList   = System.nanoTime();
+        long totalTimeLinkedList = endTimeLinkedList - startTimeLinkedList;
 //        System.out.println(arraylist.get(25));
 //        System.out.println(arraylist.get(30));
 //        System.out.println(arraylist.get(25).compareTo(arraylist.get(30)));
-        for(Iris i: linkedlist){
-            System.out.println(i.toString());
+//        for(Iris i: linkedlist){
+//            System.out.println(i.toString());
+//        }
+        System.out.println("LinkedList sort for " + listSize + " data points:");
+        for(int i = 0; i < listSize; i++){
+            //System.out.println(linkedlist.get(i).toString());
         }
-        return "return";
+        System.out.println("ArrayList sort for " + listSize + " data points:");
+        for(int i = 0; i < listSize; i++){
+            //System.out.println(arraylist.get(i).toString());
+        }
+        return ("Linked List," + listSize + "," + totalTimeLinkedList + "\n" +
+                "Array List," + listSize + "," + totalTimeArrayList);
     }
 
     public static void main(String[] args) {
@@ -135,8 +151,12 @@ public class Main {
             csvFile.createNewFile();
             PrintWriter writer = new PrintWriter(csvFile);
             writer.println(loop(1000));
-
-
+            writer.println(loop(5000));
+            writer.println(loop(10000));
+            writer.println(loop(15000));
+            writer.println(loop(20000));
+            writer.println(loop(50000));
+            writer.println(loop(100000));
             writer.close();
         } catch (IOException e){
             System.exit(1);
