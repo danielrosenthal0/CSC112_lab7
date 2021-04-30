@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -23,17 +25,7 @@ public class Main {
                 // it can only be present in left subarray
 
                 return binarySearchArrayList(a, item, mid + 1, high);
-
-                // Else the element can only be present
-                // in right subarray
-
-
             }
-
-            // We reach here when element is not present
-            // in array
-
-
         }
     }
 
@@ -43,6 +35,41 @@ public class Main {
             Iris x = a.get(i);
             int loc;
             loc = binarySearchArrayList(a, x, 0, i-1);
+            //i++;
+            a.remove(i);
+            a.add(loc, x);
+            i++;
+        }
+    }
+
+
+    public static int binarySearchLinkedList(LinkedList<Iris> a, Iris item, int low, int high) {
+
+        if (high - low == 0) {
+            return high;
+        } else {
+            int mid = low + (high - low) / 2;
+
+
+            // If the element is present at the
+            // middle itself
+            if (a.get(mid).compareTo(item) <= 0) {
+
+                return binarySearchLinkedList(a, item, low, mid);
+            } else {
+
+                // If element is smaller than mid, then
+                // it can only be present in left subarray
+
+                return binarySearchLinkedList(a, item, mid + 1, high);
+            }
+    }}
+    public static void insertionSortLinkedList(LinkedList<Iris> a) {
+        int i = 1;
+        while (i < a.size()) {
+            Iris x = a.get(i);
+            int loc;
+            loc = binarySearchLinkedList(a, x, 0, i-1);
             //i++;
             a.remove(i);
             a.add(loc, x);
@@ -65,7 +92,7 @@ public class Main {
         }
 
         ArrayList<Iris> arraylist = new ArrayList<Iris>(); //arraylist for sorting
-        LinkedList<Iris> linkedlist = new LinkedList<>(); //linkedlist for sorting
+        LinkedList<Iris> linkedlist = new LinkedList<Iris>(); //linkedlist for sorting
 
 
         //fill list
@@ -90,13 +117,14 @@ public class Main {
         reader.close();
 
         insertionSortArrayList(arraylist);
-        System.out.println(arraylist.get(25));
-        System.out.println(arraylist.get(30));
-        System.out.println(arraylist.get(25).compareTo(arraylist.get(30)));
-        for(Iris i: arraylist){
+        insertionSortLinkedList(linkedlist);
+//        System.out.println(arraylist.get(25));
+//        System.out.println(arraylist.get(30));
+//        System.out.println(arraylist.get(25).compareTo(arraylist.get(30)));
+        for(Iris i: linkedlist){
             System.out.println(i.toString());
         }
-        return "peepeepoopoo";
+        return "return";
     }
 
     public static void main(String[] args) {
