@@ -8,22 +8,16 @@ import java.util.Scanner;
 public class Main {
 
     public static int binarySearchArrayList(ArrayList<Iris> a, Iris item, int low, int high) {
+        //base case
         if (high - low == 0) {
             return high;
         } else {
-            int mid = low + (high - low) / 2;
-
-
-            // If the element is present at the
-            // middle itself
+            int mid = low + (high - low) / 2; //find middle
+            // recursively goes down left side of array
             if (a.get(mid).compareTo(item) <= 0) {
-
                 return binarySearchArrayList(a, item, low, mid);
             } else {
-
-                // If element is smaller than mid, then
-                // it can only be present in left subarray
-
+                //recursively goes down right side of array
                 return binarySearchArrayList(a, item, mid + 1, high);
             }
         }
@@ -32,45 +26,37 @@ public class Main {
     public static void insertionSortArrayList(ArrayList<Iris> a) {
         int i = 1;
         while (i < a.size()) {
+            //assigns item with i
             Iris x = a.get(i);
             int loc;
+            //calls binary search to get location
             loc = binarySearchArrayList(a, x, 0, i-1);
-            //i++;
             a.remove(i);
-            a.add(loc, x);
+            a.add(loc, x); //removes old and adds in correct number
             i++;
         }
     }
 
-
+    //same as arraylist binary search and insertion sort, just different parameter type
     public static int binarySearchLinkedList(LinkedList<Iris> a, Iris item, int low, int high) {
 
         if (high - low == 0) {
             return high;
         } else {
             int mid = low + (high - low) / 2;
-
-
-            // If the element is present at the
-            // middle itself
             if (a.get(mid).compareTo(item) <= 0) {
-
                 return binarySearchLinkedList(a, item, low, mid);
             } else {
-
-                // If element is smaller than mid, then
-                // it can only be present in left subarray
-
                 return binarySearchLinkedList(a, item, mid + 1, high);
             }
-    }}
+    }
+    }
     public static void insertionSortLinkedList(LinkedList<Iris> a) {
         int i = 1;
         while (i < a.size()) {
             Iris x = a.get(i);
             int loc;
             loc = binarySearchLinkedList(a, x, 0, i-1);
-            //i++;
             a.remove(i);
             a.add(loc, x);
             i++;
@@ -126,20 +112,8 @@ public class Main {
         insertionSortLinkedList(linkedlist);
         long endTimeLinkedList   = System.nanoTime();
         long totalTimeLinkedList = endTimeLinkedList - startTimeLinkedList;
-//        System.out.println(arraylist.get(25));
-//        System.out.println(arraylist.get(30));
-//        System.out.println(arraylist.get(25).compareTo(arraylist.get(30)));
-//        for(Iris i: linkedlist){
-//            System.out.println(i.toString());
-//        }
-        System.out.println("LinkedList sort for " + listSize + " data points:");
-        for(int i = 0; i < listSize; i++){
-            //System.out.println(linkedlist.get(i).toString());
-        }
-        System.out.println("ArrayList sort for " + listSize + " data points:");
-        for(int i = 0; i < listSize; i++){
-            //System.out.println(arraylist.get(i).toString());
-        }
+
+
         return ("Linked List," + listSize + "," + totalTimeLinkedList + "\n" +
                 "Array List," + listSize + "," + totalTimeArrayList);
     }
@@ -157,7 +131,6 @@ public class Main {
             writer.println(loop(15000));
             writer.println(loop(20000));
             writer.println(loop(50000));
-            //writer.println(loop(75000));
             writer.close();
         } catch (IOException e){
             System.exit(1);
