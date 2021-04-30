@@ -110,6 +110,7 @@ public class Main {
 
         //reader iterates thru list certain number of times, splits by comma and parses and adds to linkedlist
         for (int i = 0; i < listSize; i ++) {
+
             lines = reader.nextLine().split(",");
             linkedlist.add(new Iris(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]), Double.parseDouble(lines[2]),
                     Double.parseDouble(lines[3]), lines[4]));
@@ -156,7 +157,7 @@ public class Main {
             writer.println(loop(15000));
             writer.println(loop(20000));
             writer.println(loop(50000));
-            writer.println(loop(100000));
+            //writer.println(loop(75000));
             writer.close();
         } catch (IOException e){
             System.exit(1);
