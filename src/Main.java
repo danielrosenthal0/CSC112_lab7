@@ -5,48 +5,52 @@ import java.util.Scanner;
 
 public class Main {
 
-    int binarySearch(LinkedList a, Iris item, int low, int high) {
-        if (high >= low) {
+    public static int binarySearchArrayList(ArrayList<Iris> a, Iris item, int low, int high) {
+        if (high - low == 0) {
+            return high;
+        } else {
             int mid = low + (high - low) / 2;
+
 
             // If the element is present at the
             // middle itself
-            if (a.get(mid) == item)
-                return mid;
+            if (a.get(mid).compareTo(item) <= 0) {
 
-            // If element is smaller than mid, then
-            // it can only be present in left subarray
-            if (a.get(mid).compareTo(item) > 0))
-                return binarySearch(a, item, mid - 1, low);
+                return binarySearchArrayList(a, item, low, mid);
+            } else {
 
-            // Else the element can only be present
-            // in right subarray
-            return binarySearch(a, item, mid+1, high);
-        }
+                // If element is smaller than mid, then
+                // it can only be present in left subarray
 
-        // We reach here when element is not present
-        // in array
-        return -1;
-        return 0;
-    }
+                return binarySearchArrayList(a, item, mid + 1, high);
 
-    void insertionSort(LinkedList a, int n) {
-        int n = a.size();
-        for (int i = 1; i < n; ++i) {
-            int key = (int) a.get(i);
-            int j = i - 1;
+                // Else the element can only be present
+                // in right subarray
 
-            /* Move elements of arr[0..i-1], that are
-               greater than key, to one position ahead
-               of their current position */
-            while (j >= 0 && a[j] > key) {
-                a[j + 1] = a[j];
-                j = j - 1;
+
             }
-            a[j + 1] = key;
-        }
+
+            // We reach here when element is not present
+            // in array
+
+
         }
     }
+
+    public static void insertionSortArrayList(ArrayList<Iris> a) {
+        int i = 1;
+        while (i < a.size()) {
+            Iris x = a.get(i);
+            int loc;
+            loc = binarySearchArrayList(a, x, 0, i-1);
+            //i++;
+            a.remove(i);
+            a.add(loc, x);
+            i++;
+        }
+    }
+
+
 
     public static String loop(int listSize) {
         //file reader
@@ -63,6 +67,7 @@ public class Main {
         ArrayList<Iris> arraylist = new ArrayList<Iris>(); //arraylist for sorting
         LinkedList<Iris> linkedlist = new LinkedList<>(); //linkedlist for sorting
 
+
         //fill list
         Scanner reader = new Scanner(fis);
         reader.nextLine(); //skips column headers
@@ -72,6 +77,7 @@ public class Main {
             arraylist.add(new Iris(Double.parseDouble(lines[0]), Double.parseDouble(lines[1]), Double.parseDouble(lines[2]),
                     Double.parseDouble(lines[3]), lines[4]));
             //test1
+
 
         }
 
@@ -83,10 +89,14 @@ public class Main {
         }
         reader.close();
 
-        //test
-        String print;
-        print = linkedlist.get(11).toString();
-        return print;
+        insertionSortArrayList(arraylist);
+        System.out.println(arraylist.get(25));
+        System.out.println(arraylist.get(30));
+        System.out.println(arraylist.get(25).compareTo(arraylist.get(30)));
+        for(Iris i: arraylist){
+            System.out.println(i.toString());
+        }
+        return "peepeepoopoo";
     }
 
     public static void main(String[] args) {
@@ -103,5 +113,6 @@ public class Main {
         } catch (IOException e){
             System.exit(1);
         }
+
     }
 }

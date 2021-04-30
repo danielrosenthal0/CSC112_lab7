@@ -78,11 +78,16 @@ public class Iris implements Comparable<Iris>{
     public int compareTo(Iris o) {
         int sepal_lengthCompare = Double.compare(sepal_length, o.sepal_length);
         int petal_lengthCompare = Double.compare(petal_length, o.petal_length);
-        return ((sepal_lengthCompare == 0) ? petal_lengthCompare : sepal_lengthCompare);
+        if(sepal_lengthCompare == 0){
+            return petal_lengthCompare;
+        }
+        return sepal_lengthCompare;
+        //return ((sepal_lengthCompare == 0) ? petal_lengthCompare : sepal_lengthCompare);
     }
 
     //
     boolean isLessThan(Iris Iris2) {
+
         return(this.compareTo(Iris2) < 0);
     }
 }
